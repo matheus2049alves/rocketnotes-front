@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  margin: 56px 0 28px;
+  margin: 28px 0;
 
   border-bottom: 1px solid;
   border-bottom-color: ${({theme}) => theme.Colors.BACKGROUND_700};
 
   > h2 {
     padding-bottom: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 
     color:  ${({theme}) => theme.Colors.GRAY_100};
 
