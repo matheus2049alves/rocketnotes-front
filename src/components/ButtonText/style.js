@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.button`
   background: none;
-  color: ${({theme}) => theme.Colors.ORANGE };
+  color : ${({theme, isActive}) => isActive ? theme.Colors.ORANGE : theme.Colors.GRAY_100};
   border: none;
   font-size: 16px;
 
