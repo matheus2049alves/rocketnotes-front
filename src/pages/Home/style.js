@@ -53,11 +53,21 @@ export const  Search = styled.div`
 `
 export const  Content = styled.div`
   grid-area: content;
-  background-color: pink;
+  
+  
 
 `
 export const  NewNote = styled.button`
   grid-area: newnote;
-  background-color: brown;
+  
+  background:${({theme}) => theme.Colors.ORANGE} ;
+  border: none;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  >svg {
+    margin-right: 8px;
+  }
 `
