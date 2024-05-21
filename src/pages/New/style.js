@@ -8,6 +8,18 @@ export const Container = styled.div`
   grid-template-rows: 105px auto;
   grid-template-areas: "header" "content";
 
+  .tags {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  >main {
+    grid-area: content;
+    overflow-y: auto;
+  }
+
 `
 
 export const Form = styled.form`
