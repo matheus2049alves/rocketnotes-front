@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const  Container = styled.div`
@@ -59,11 +60,11 @@ export const  Content = styled.div`
   
 
 `
-export const  NewNote = styled.button`
+export const  NewNote = styled(Link)`
   grid-area: newnote;
   
-  background:${({theme}) => theme.Colors.ORANGE} ;
-  border: none;
+  background:${({theme}) => theme.Colors.ORANGE};
+  color: ${({theme}) => theme.Colors.WHITE};
 
   display: flex;
   justify-content: center;
