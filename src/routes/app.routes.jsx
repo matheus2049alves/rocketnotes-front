@@ -11,7 +11,7 @@ export function AppRoutes(){
     <Routes>
       <Route path="/" element = {<Home/>}/>
       <Route path="/new" element = {<New/>}/>
-      <Route path="/derails/:id" element = {<details/>}/>
+      <Route path="/details/:id" element = {<details/>}/>
       <Route path="/profile" element = {<Profile/>}/>
     </Routes>
   )
