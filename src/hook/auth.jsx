@@ -1,17 +1,22 @@
-import {createContext, useContext} from "react"
+import {createContext, useContext, useEffect} from "react"
 import { useState } from "react"
 import { api } from "../services/api"
+import { json } from "react-router-dom"
 const AuthContext = createContext({})
 
 function AuthProvider({children}){
   const [data, setData] = useState({})
   async function signIn({email, password}){
+
     try {
       const response = await  api.post("/sessions", {email, password})
       const {user, token} = response.data
       setData({user, token})
 
-      api.defaults.headers.authorization = `Bearer ${token}`
+      localStorage.setItem("@rocktenots: user", JSON.stringify(user))
+      localStorage.setItem("@rocktenots: token", token)
+
+      api.defaults.headers.common['authorization'] = `Bearer ${token}`
 
     console.log(user, token)
     } catch (error) {
@@ -24,8 +29,27 @@ function AuthProvider({children}){
     
   }
 
+  function signOut(){
+    localStorage.removeItem("@rocktenots: user")
+    localStorage.removeItem("@rocktenots: token")
+
+    setData({})
+  }
+  useEffect(() => {
+    const user = localStorage.getItem("@g4construtora : sucesso")
+    const token = localStorage.getItem("@rocktenots: token")
+
+    if (token && user){
+      api.defaults.headers.common['authorization'] = `Bearer ${token}`
+      setData({
+        token,
+        user : JSON.parse(user)
+      })
+    }
+  }, [])
+
   return(
-    <AuthContext.Provider value={{signIn, user : data.user}}>
+    <AuthContext.Provider value={{signIn, user : data.user, signOut}}>
       {children}
     </AuthContext.Provider>
   )

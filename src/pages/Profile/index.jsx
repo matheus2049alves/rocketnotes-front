@@ -3,9 +3,18 @@ import {FiArrowLeft, FiUser,FiMail,FiLock,FiCamera} from "react-icons/fi"
 import { Input } from "../../components/Input";
 import { Button } from "../../components/button";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hook/auth";
+import { useState } from "react";
 
 
 export function Profile(){
+  const {user} = useAuth()
+
+  const [email, setEmail] = useState(user.email)
+  const [name, setName] = useState(user.name)
+  const [password, setPassword] = useState("")
+  const [old_password, setOldPassword] = useState("")
+
   return (
     <Container>
       <header>
@@ -35,22 +44,32 @@ export function Profile(){
         <Input 
         placeholder = "Nome"
         type = "text"
-        icon={FiUser}/>
+        icon={FiUser}
+        value = {name}
+        onChange = {e => setName(e.target.value)}
+        />
       
         <Input 
         placeholder = "E-mail"
         type = "text"
-        icon={FiMail}/>
+        icon={FiMail}
+        value = {email}
+        onChange = {e => setEmail(e.target.value)}
+        />
      
         <Input 
         placeholder = "Senha Atual"
         type = "password"
-        icon={FiLock}/>
+        icon={FiLock}
+        onChange = {e => setPassword(e.target.value)}
+        />
      
         <Input 
         placeholder = "Nova Senha"
         type = "password"
-        icon={FiLock}/>
+        icon={FiLock}
+        onChange = {e => setOldPassword(e.target.value)}
+        />
         
         <Button title={"Salvar"}/>
 
