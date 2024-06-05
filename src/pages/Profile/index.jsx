@@ -8,12 +8,23 @@ import { useState } from "react";
 
 
 export function Profile(){
-  const {user} = useAuth()
+  const {user,updateProfile} = useAuth()
 
   const [email, setEmail] = useState(user.email)
   const [name, setName] = useState(user.name)
   const [password, setPassword] = useState("")
   const [old_password, setOldPassword] = useState("")
+
+  async function handleUpdate(){
+    const user = {
+      name,
+      email,
+      password,
+      old_password
+    }
+
+    await updateProfile({user})
+  }
 
   return (
     <Container>
@@ -61,17 +72,17 @@ export function Profile(){
         placeholder = "Senha Atual"
         type = "password"
         icon={FiLock}
-        onChange = {e => setPassword(e.target.value)}
+        onChange = {e => setOldPassword(e.target.value)}
         />
      
         <Input 
         placeholder = "Nova Senha"
         type = "password"
         icon={FiLock}
-        onChange = {e => setOldPassword(e.target.value)}
+        onChange = {e => setPassword(e.target.value)}
         />
         
-        <Button title={"Salvar"}/>
+        <Button title={"Salvar"} onClick = {handleUpdate}/>
 
       </Form>
 
