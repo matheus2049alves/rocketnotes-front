@@ -1,11 +1,15 @@
 import {createContext, useContext, useEffect} from "react"
 import { useState } from "react"
 import { api } from "../services/api"
-import { json } from "react-router-dom"
+
+
+
 const AuthContext = createContext({})
 
 function AuthProvider({children}){
   const [data, setData] = useState({})
+
+  
   async function signIn({email, password}){
 
     try {
@@ -59,7 +63,7 @@ function AuthProvider({children}){
     }
   }
   useEffect(() => {
-    const user = localStorage.getItem("@g4construtora : sucesso")
+    const user = localStorage.getItem("@rocktenots: user")
     const token = localStorage.getItem("@rocktenots: token")
 
     if (token && user){
