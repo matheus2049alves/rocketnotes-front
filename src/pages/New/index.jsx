@@ -12,16 +12,29 @@ export function New(){
   const [links, setLinks] = useState([])
   const [newLink, setNewLink] = useState("")
 
+  const [tags, setTags] = useState([])
+  const [newTag, setNewTag] = useState("")
+
   function handleAddLink(){
     setLinks(previous => [...previous, newLink])
     setNewLink("")
-    console.log(links)
+
   }
 
   function handleRemoveLink(deleted){
     // filter() é uma função de alta ordem que permite criar um novo array contendo 
     // apenas os elementos de um array original que satisfazem uma determinada condição.
     setLinks(previous => previous.filter(link => link != deleted))
+  }
+
+  function handleAddTag(){
+    setTags(previous => [...previous, newTag])
+    setNewTag("")
+  }
+
+  function handleRemoveTag(deleted){
+    setTags(previous => previous.filter(tag => tag != deleted))
+    console.log("chamando")
   }
 
   
@@ -61,8 +74,21 @@ export function New(){
           
             <Section title={"Marcadores"}>
             <div className="tags">
-              <NoteItem value = "React"/>
-              <NoteItem isNew placeholder = "Nova Tag" />
+              {
+               tags.map((tag,index) => (
+                <NoteItem 
+                key={String(index)}
+                value = {tag}
+                onClick={() => handleRemoveTag(tag)}
+              />
+               )) 
+              }
+              <NoteItem isNew 
+              placeholder = "Nova Tag" 
+              value={newTag}
+              onChange = {e => setNewTag(e.target.value)}
+              onClick={handleAddTag}
+              />
             </div>
           </Section>
         
