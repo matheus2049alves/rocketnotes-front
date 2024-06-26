@@ -18,7 +18,7 @@ export function Details() {
   const [linkVerification,setLinkVerification] = useState(false)
 
   function handleBack(){
-    navigate('/')
+    navigate(-1)
   }
 
   async function handleRemove(){
@@ -26,7 +26,7 @@ export function Details() {
 
     if (confirm){
       await api.delete(`/notes/${params.id}`)
-      navigate('/')
+      navigate(-1)
     }
   }
   useEffect(() => {
