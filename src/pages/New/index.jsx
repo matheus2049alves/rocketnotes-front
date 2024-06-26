@@ -7,13 +7,37 @@ import { Section } from "../../components/Section";
 import { Button } from "../../components/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { api } from "../../services/api";
+import { Navigate } from "react-router-dom";
 
 export function New(){
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+
   const [links, setLinks] = useState([])
   const [newLink, setNewLink] = useState("")
 
   const [tags, setTags] = useState([])
   const [newTag, setNewTag] = useState("")
+
+  async function handleNewNote(){
+    if (!title){
+      return alert("Adicione um título para a nota")
+    }
+
+    if (newLink){
+      return alert("Você esqueceu de adicionar um link! adicione ou remova-o!")
+    }
+
+    if (newTag){
+      return alert("Você esqueceu de adicionar uma tag! adicione ou remova!")
+    }
+    console.log(title, description,links,tags)
+    await api.post("/notes", {title,description,links,tags})
+
+    alert("Nota criada com sucesso")
+    Navigate("/")
+  }
 
   function handleAddLink(){
     setLinks(previous => [...previous, newLink])
@@ -49,9 +73,11 @@ export function New(){
           </header>
           <Input
             placeholder = "Título"
+            onChange = {e => setTitle(e.target.value)}
           />
           <Textarea
             placeholder = "Observações"
+            onChange = {e => setDescription(e.target.value)}
           />
         
           
@@ -92,7 +118,9 @@ export function New(){
             </div>
           </Section>
         
-          <Button title={"Salvar"}/>
+          <Button title={"Salvar"}
+          onClick = {handleNewNote}
+          />
         </Form>
       </main>
     </Container>
